@@ -1,0 +1,9 @@
+@theme {
+  --color-pink: #eb6bd8;
+}
+
+@layer base {
+  @variant dark {
+    --color-pink: #8e0d7a;
+  }
+}

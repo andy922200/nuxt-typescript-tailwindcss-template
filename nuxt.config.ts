@@ -57,13 +57,13 @@ export default defineNuxtConfig({
             }
           },
           chunkFileNames() {
-            return `${appBuildAssetsDir}/[name]_${dateStamp}_[hash:6].js`
+            return `${appBuildAssetsDir}/[name]_${dateStamp}_[hash:7].js`
           },
           entryFileNames() {
-            return `${appBuildAssetsDir}/[name]_${dateStamp}_[hash:6].js`
+            return `${appBuildAssetsDir}/[name]_${dateStamp}_[hash:7].js`
           },
           assetFileNames() {
-            return `${appBuildAssetsDir}/[name]_${dateStamp}_[hash:6].[ext]`
+            return `${appBuildAssetsDir}/[name]_${dateStamp}_[hash:7].[ext]`
           },
         },
       },

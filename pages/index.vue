@@ -3,6 +3,7 @@ import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+import { useThemeCssVars } from '@/composables/useThemeCssVars'
 import { useSiteStore } from '@/store/site'
 import { useNuxtApp } from '#app'
 import MdiHamburgerMenu from '~icons/mdi/hamburger-menu'
@@ -25,6 +26,7 @@ const { $dayjs, $demoAPI } = useNuxtApp()
 const siteStore = useSiteStore()
 const { site } = storeToRefs(siteStore)
 const { t } = useI18n()
+const { setCssVars } = useThemeCssVars()
 
 const language = computed({
   get: () => site.value.language,
@@ -40,6 +42,23 @@ const fetchData = async () => {
 
   siteStore.fetchDemo()
 }
+
+const changeDarkMode = () => {
+  document.documentElement.classList.toggle('dark')
+}
+
+setCssVars({
+  lightVars: {
+    'layout-color': 'F4F4F4',
+    'text-color': '333333',
+    'btn-color': 'FF9900',
+  },
+  darkVars: {
+    'layout-color': '1A1A1A',
+    'text-color': 'CCCCCC',
+    'btn-color': 'FF6600',
+  },
+})
 
 onMounted(() => {
   fetchData()
@@ -58,6 +77,17 @@ onMounted(() => {
           <option value="en-us">en-us</option>
           <option value="zh-tw">zh-tw</option>
         </select>
+      </div>
+
+      <button class="bg-pink size-20 hover:cursor-pointer dark:text-white" @click="changeDarkMode">
+        Click Here
+      </button>
+      <div class="h-12 w-50 bg-purple-200 dark:bg-purple-900 dark:text-white">Lorem Ipsum</div>
+
+      <div
+        class="bg-[var(--layout-color)] text-[var(--text-color)] dark:bg-[var(--layout-color)] dark:text-[var(--text-color)]"
+      >
+        支援動態主題色 + dark mode
       </div>
 
       <p class="hello">
