@@ -21,7 +21,7 @@ fi
 # 確保 API_BASE_URL 參數存在，否則終止執行
 if [ -z "$1" ]; then
   echo "❌ 錯誤：請提供 API_BASE_URL！"
-  echo "👉 使用方式： ./generate.sh <API_BASE_URL>"
+  echo "👉 使用方式： ./generate.sh <API_BASE_URL> <APP_BASE_URL>"
   echo "   例如： ./generate.sh https://staging-api.com staging /nuxt"
   exit 1
 fi
@@ -29,7 +29,7 @@ fi
 # 確保 ENV_NAME 參數存在，否則終止執行
 if [ -z "$2" ]; then
   echo "❌ 錯誤：請提供 ENV_NAME！"
-  echo "👉 使用方式： ./generate.sh <API_BASE_URL> <ENV_NAME>"
+  echo "👉 使用方式： ./generate.sh <API_BASE_URL> <ENV_NAME> <APP_BASE_URL>"
   echo "   例如： ./generate.sh https://staging-api.com staging /nuxt"
   exit 1
 fi
@@ -37,7 +37,7 @@ fi
 # 確保 APP_BASE_URL 參數存在，否則終止執行
 if [ -z "$3" ]; then
   echo "❌ 錯誤：請提供 APP_BASE_URL！"
-  echo "👉 使用方式： ./generate.sh <API_BASE_URL> <ENV_NAME>"
+  echo "👉 使用方式： ./generate.sh <API_BASE_URL> <ENV_NAME> <APP_BASE_URL>"
   echo "   例如： ./generate.sh https://staging-api.com staging /nuxt"
   exit 1
 fi
