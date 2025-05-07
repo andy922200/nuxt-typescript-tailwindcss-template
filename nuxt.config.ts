@@ -12,8 +12,10 @@ const appBuildAssetsDir = '_nuxt'
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   app: {
-    buildAssetsDir: `/${appBuildAssetsDir}/`,
     /* head 可在 plugins/head 統一添加 */
+    buildAssetsDir: `/${appBuildAssetsDir}/`,
+    /* 依據 Server 佈署調整 */
+    baseURL: process.env.NUXT_APP_BASE_URL || '/',
   },
   modules: ['@nuxt/eslint', '@pinia/nuxt', 'unplugin-icons/nuxt', '@nuxt/test-utils/module'],
   css: ['~/assets/css/tailwind.css'],
@@ -29,6 +31,7 @@ export default defineNuxtConfig({
     https: useHttpsConfig(),
   },
   runtimeConfig: {
+    apiBaseUrl: '',
     public: {
       envName: '',
       apiBaseUrl: '',

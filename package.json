@@ -9,8 +9,6 @@
     "preview": "nuxt preview",
     "generate": "nuxt generate",
     "postinstall": "nuxt prepare",
-    "start-preview": "./start-server.sh",
-    "preview-prod": "run-s build start-preview",
     "lint": "eslint . --fix",
     "vitest": "vitest"
   },

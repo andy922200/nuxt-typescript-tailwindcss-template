@@ -5,10 +5,18 @@ import { createHttpClient } from '~/utils'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const runtimeConfig = useRuntimeConfig()
-  const isLocal = runtimeConfig.public.envName === 'local'
+  const envName = runtimeConfig.public.envName || ''
+  const isLocal = envName === 'local'
+  const isGenerating = process.env.NUXT_COMMAND === 'generate'
+  const isServer = import.meta.server
 
   const fetchOptions: FetchOptions = {
-    baseURL: isLocal ? '/api' : runtimeConfig.public.apiBaseUrl,
+    baseURL:
+      isLocal || isGenerating
+        ? '/api'
+        : isServer
+          ? runtimeConfig.apiBaseUrl
+          : runtimeConfig.public.apiBaseUrl,
   }
 
   const apiCustomInstance = createHttpClient($fetch.create(fetchOptions))

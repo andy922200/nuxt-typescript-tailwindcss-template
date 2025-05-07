@@ -43,7 +43,8 @@ if [ -z "$3" ]; then
 fi
 
 # 生成 .env 檔案
-echo "NUXT_APP_BASE_URL="$APP_BASE_URL"" > .env 
+echo "NUXT_APP_BASE_URL="$APP_BASE_URL"" > .env
+echo "NUXT_API_BASE_URL=$API_BASE_URL" >> .env
 echo "NUXT_PUBLIC_ENV_NAME=$ENV_NAME" >> .env
 echo "NUXT_PUBLIC_API_BASE_URL=$API_BASE_URL" >> .env
 
