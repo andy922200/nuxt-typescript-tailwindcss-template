@@ -14,9 +14,8 @@ vi.mock('vue-i18n', () => ({
 // 建立全域 i18n，確保測試環境不會報錯
 const i18n = createI18n({
   legacy: false,
-  locale: 'en',
   messages: {
-    en: {},
+    'en-US': {},
   },
 })
 

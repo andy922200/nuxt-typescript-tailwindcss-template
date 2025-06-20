@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     /* 依據 Server 佈署調整 */
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
   },
-  modules: ['@nuxt/eslint', '@pinia/nuxt', 'unplugin-icons/nuxt', '@nuxt/test-utils/module'],
+  modules: ['@nuxtjs/i18n','@nuxt/eslint', '@pinia/nuxt', 'unplugin-icons/nuxt', '@nuxt/test-utils/module'],
   css: ['~/assets/css/tailwind.css'],
   postcss: {
     plugins: {
@@ -41,10 +41,32 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vue-i18n'],
   },
+  i18n: {
+    restructureDir: 'lang',
+    langDir: '',
+    baseUrl: process.env.NUXT_APP_BASE_URL || '/',
+    defaultLocale: 'zh-tw',
+    detectBrowserLanguage: {
+      useCookie: true,
+      redirectOn: 'root',
+    },
+    locales: [
+      {
+        code: 'zh-tw',
+        name: '繁體中文',
+        file: 'zh-tw.ts',
+      },
+      {
+        code: 'en-us',
+        name: 'English',
+        file: 'en-us.ts',
+      },
+    ]
+  },
   vite: {
     plugins: [
       VueI18nVitePlugin({
-        include: [resolve(dirname(fileURLToPath(import.meta.url)), './lang/*.ts')],
+        include: [resolve(dirname(fileURLToPath(import.meta.url)), './lang/*.{js,ts')],
       }),
     ],
     build: {

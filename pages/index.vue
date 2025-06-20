@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import { useThemeCssVars } from '@/composables/useThemeCssVars'
@@ -24,16 +22,9 @@ useHead({
 
 const { $dayjs, $demoAPI } = useNuxtApp()
 const siteStore = useSiteStore()
-const { site } = storeToRefs(siteStore)
-const { t } = useI18n()
+const { t, locale, locales, loadLocaleMessages } = useI18n()
 const { setCssVars } = useThemeCssVars()
-
-const language = computed({
-  get: () => site.value.language,
-  set: (lang: string) => {
-    siteStore.setLanguage(lang)
-  },
-})
+const switchLocalePath = useSwitchLocalePath()
 
 const fetchData = async () => {
   const res = await $demoAPI.getADemo({ id: '1' })
@@ -63,6 +54,15 @@ setCssVars({
 onMounted(() => {
   fetchData()
 })
+
+watch(
+  () => locale.value,
+  async (newLocale) => {
+    await loadLocaleMessages(newLocale)
+    const path = switchLocalePath(newLocale)
+    if (path) navigateTo(path)
+  },
+)
 </script>
 
 <template>
@@ -71,11 +71,12 @@ onMounted(() => {
       <div class="m-2 w-[200px]">
         <select
           id="locale-select"
-          v-model="language"
+          v-model="locale"
           class="block w-full appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
         >
-          <option value="en-us">en-us</option>
-          <option value="zh-tw">zh-tw</option>
+          <option v-for="item in locales" :key="item.code" :value="item.code">
+            {{ item.name }}
+          </option>
         </select>
       </div>
 
