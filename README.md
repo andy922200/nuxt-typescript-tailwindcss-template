@@ -27,7 +27,7 @@
 ## Prerequisites
 <p>請先安裝好 Node.js 環境</p>
 
-- [pnpm](https://yarnpkg.com/)
+- [pnpm](https://pnpm.io/zh-TW/)
 - [Node.js](https://nodejs.org/en/download/)
 
 This Demo project is running on Node.js (20.12.0), NPM (10.5.0) while testing.

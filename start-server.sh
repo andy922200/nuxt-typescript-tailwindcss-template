@@ -41,10 +41,12 @@ fi
 cd "$(dirname "$0")/.output"
 
 # 確保 .env 存在並覆寫內容
-echo "NUXT_APP_BASE_URL="$APP_BASE_URL"" > .env
-echo "NUXT_API_BASE_URL=$API_BASE_URL" >> .env
-echo "NUXT_PUBLIC_ENV_NAME=$ENV_NAME" >> .env
-echo "NUXT_PUBLIC_API_BASE_URL=$API_BASE_URL" >> .env
+cat <<EOF > .env
+  NUXT_APP_BASE_URL=$APP_BASE_URL
+  NUXT_API_BASE_URL=$API_BASE_URL
+  NUXT_PUBLIC_ENV_NAME=$ENV_NAME
+  NUXT_PUBLIC_API_BASE_URL=$API_BASE_URL
+EOF
 
 # 載入 .env 變數到環境
 export $(cat .env | xargs)
