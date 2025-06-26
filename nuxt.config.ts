@@ -17,7 +17,13 @@ export default defineNuxtConfig({
     /* 依據 Server 佈署調整 */
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
   },
-  modules: ['@nuxtjs/i18n','@nuxt/eslint', '@pinia/nuxt', 'unplugin-icons/nuxt', '@nuxt/test-utils/module'],
+  modules: [
+    '@nuxtjs/i18n',
+    '@nuxt/eslint',
+    '@pinia/nuxt',
+    'unplugin-icons/nuxt',
+    '@nuxt/test-utils/module',
+  ],
   css: ['~/assets/css/tailwind.css'],
   postcss: {
     plugins: {
@@ -50,6 +56,9 @@ export default defineNuxtConfig({
       useCookie: true,
       redirectOn: 'root',
     },
+    bundle: {
+      optimizeTranslationDirective: false,
+    },
     locales: [
       {
         code: 'zh-tw',
@@ -61,7 +70,7 @@ export default defineNuxtConfig({
         name: 'English',
         file: 'en-us.ts',
       },
-    ]
+    ],
   },
   vite: {
     plugins: [
