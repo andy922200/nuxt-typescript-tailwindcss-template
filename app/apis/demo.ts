@@ -1,4 +1,4 @@
-import { HTTPMethod } from '@/types'
+import { HTTPMethod } from '~/types'
 import type { createHttpClient } from '~/utils'
 
 export type DemoAPI = ReturnType<typeof createDemoAPI>

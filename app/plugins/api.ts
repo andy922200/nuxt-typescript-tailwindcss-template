@@ -1,4 +1,5 @@
-import { $fetch, type FetchOptions } from 'ofetch'
+import type { FetchOptions } from 'ofetch'
+import { $fetch } from 'ofetch'
 
 import { createDemoAPI } from '~/apis/demo'
 import { createHttpClient } from '~/utils'

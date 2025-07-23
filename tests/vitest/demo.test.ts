@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
-import DemoPage from '@/pages/index.vue'
+import DemoPage from '../../app/pages/index.vue'
 
 vi.mock('vue-i18n', () => ({
   useI18n: () => ({

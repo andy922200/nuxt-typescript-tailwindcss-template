@@ -3,9 +3,9 @@ import { fileURLToPath } from 'node:url'
 
 import VueI18nVitePlugin from '@intlify/unplugin-vue-i18n/vite'
 
-import { useHttpsConfig } from './composables/useHttpsConfig'
+import { useHttpsConfig } from './app/composables/useHttpsConfig'
 
-const dateStamp = new Date().toISOString().split('T')[0].replaceAll('-', '')
+const dateStamp = new Date().toISOString().split('T')[0]?.replaceAll('-', '')
 const appBuildAssetsDir = '_nuxt'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config

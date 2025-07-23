@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import { useThemeCssVars } from '@/composables/useThemeCssVars'
-import { useSiteStore } from '@/store/site'
 import { useNuxtApp } from '#app'
+import { useThemeCssVars } from '~/composables/useThemeCssVars'
+import { useSiteStore } from '~/store/site'
 import MdiHamburgerMenu from '~icons/mdi/hamburger-menu'
 
 defineOptions({
@@ -56,7 +56,7 @@ onMounted(() => {
 })
 
 watch(
-  () => locale.value,
+  () => locale?.value,
   async (newLocale) => {
     await loadLocaleMessages(newLocale)
     const path = switchLocalePath(newLocale)

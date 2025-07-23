@@ -1,7 +1,7 @@
 {
-  "name": "nuxt3-typescript-tailwindcss-template",
+  "name": "nuxt-typescript-tailwindcss-template",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "nuxt dev --dotenv .env.dev",
@@ -24,7 +24,7 @@
     "@nuxtjs/i18n": "^9.5.6",
     "dayjs": "^1.11.13",
     "lodash-es": "^4.17.21",
-    "nuxt": "^3.17.6",
+    "nuxt": "^4.0.1",
     "pinia": "^3.0.3",
     "vue": "^3.5.17"
   },
@@ -56,6 +56,6 @@
     "typescript-eslint": "^8.35.1",
     "unplugin-icons": "^22.1.0",
     "vitest": "^3.2.4",
-    "vue-tsc": "^2.2.12"
+    "vue-tsc": "^3.0.3"
   }
 }

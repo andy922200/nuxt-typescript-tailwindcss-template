@@ -1,5 +1,5 @@
-import type { DayjsType } from '@/plugins/dayjs'
 import type { DemoAPI } from '~/apis/demo'
+import type { DayjsType } from '~/plugins/dayjs'
 
 enum BuildENV {
   development = 'development',
