@@ -1,11 +1,18 @@
 import { HTTPMethod } from '~/types'
 import type { createHttpClient } from '~/utils'
 
+interface getADemoRes {
+  id: number
+  userId: number
+  title: string
+  body: string
+}
+
 export type DemoAPI = ReturnType<typeof createDemoAPI>
 export const createDemoAPI = (fetcher: ReturnType<typeof createHttpClient>) => {
   const getADemo = async ({ id }: { id: string }) => {
     try {
-      const res = await fetcher({
+      const res = await fetcher<getADemoRes>({
         method: HTTPMethod.GET,
         url: '/',
         params: { id },

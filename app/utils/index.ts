@@ -51,8 +51,8 @@ export const scrollTo = (hashPath: string = '') => {
  * @param fetcher An instance of $Fetch
  * @returns A function to make API requests.
  */
-export const createHttpClient = <T>(fetcher: $Fetch) => {
-  return async function call({
+export const createHttpClient = (fetcher: $Fetch) => {
+  return async function call<T>({
     method,
     url,
     data,
