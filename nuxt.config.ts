@@ -2,11 +2,24 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import VueI18nVitePlugin from '@intlify/unplugin-vue-i18n/vite'
+import Aura from '@primeuix/themes/aura'
+import { PrimeVueResolver } from '@primevue/auto-import-resolver'
+import Icons from 'unplugin-icons/vite'
+import Components from 'unplugin-vue-components/vite'
+import svgLoader from 'vite-svg-loader'
 
 import { useHttpsConfig } from './app/composables/useHttpsConfig'
 
 const dateStamp = new Date().toISOString().split('T')[0]?.replaceAll('-', '')
 const appBuildAssetsDir = '_nuxt'
+const isLocalDev = process.env.NUXT_PUBLIC_ENV_NAME === 'local'
+
+if (isLocalDev) {
+  // fix for @primevue/nuxt-module 4.3.6 for Nuxt 4 compatibility
+  console.log(
+    `Please change compatibility from { nuxt: "^3.0.0" } to { nuxt: "^4.0.0" } at node_modules/@primevue/nuxt-module/dist/module.mjs and then pnpm install again.`,
+  )
+}
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -22,8 +35,38 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@pinia/nuxt',
     'unplugin-icons/nuxt',
+    '@primevue/nuxt-module',
     '@nuxt/test-utils/module',
   ],
+  primevue: {
+    autoImport: false,
+    components: {
+      include: [
+        'Button',
+        'Divider',
+        'Card',
+        'Knob',
+        'DataTable',
+        'Column',
+        'Paginator',
+        'Skeleton',
+        'Checkbox',
+      ],
+    },
+    options: {
+      theme: {
+        preset: Aura,
+        options: {
+          prefix: 'p',
+          darkModeSelector: '.dark',
+          cssLayer: {
+            name: 'primevue',
+            order: 'theme, base, primevue',
+          },
+        },
+      },
+    },
+  },
   css: ['~/assets/css/tailwind.css'],
   postcss: {
     plugins: {
@@ -76,6 +119,13 @@ export default defineNuxtConfig({
     plugins: [
       VueI18nVitePlugin({
         include: [resolve(dirname(fileURLToPath(import.meta.url)), './lang/*.{js,ts')],
+      }),
+      Components({
+        resolvers: [PrimeVueResolver()],
+      }),
+      svgLoader(),
+      Icons({
+        autoInstall: true,
       }),
     ],
     build: {

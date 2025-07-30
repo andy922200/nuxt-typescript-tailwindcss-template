@@ -2,8 +2,12 @@
 import { useI18n } from 'vue-i18n'
 
 import { useNuxtApp } from '#app'
+import BaseDataTable from '~/components/BaseDataTable/index.vue'
+import type { TableConfig } from '~/components/BaseDataTable/type'
+import { createTableColumns } from '~/components/BaseDataTable/utils'
 import { useThemeCssVars } from '~/composables/useThemeCssVars'
 import { useSiteStore } from '~/store/site'
+import MaterialSymbolsLightSearch from '~icons/material-symbols-light/search'
 import MdiHamburgerMenu from '~icons/mdi/hamburger-menu'
 
 defineOptions({
@@ -25,6 +29,59 @@ const siteStore = useSiteStore()
 const { t, locale, locales, loadLocaleMessages } = useI18n()
 const { setCssVars } = useThemeCssVars()
 const switchLocalePath = useSwitchLocalePath()
+
+const productTableConfig = ref({
+  pageCount: 10,
+  totalAmount: 0,
+  first: 0,
+  data: [],
+  sortField: undefined as string | undefined,
+  sortOrder: undefined as number | undefined,
+})
+
+const products = ref([
+  { code: 'A1', name: 'Apple', category: 'Fruit', quantity: 10 },
+  { code: 'B2', name: 'Banana', category: 'Fruit', quantity: 20 },
+  { code: 'C3', name: 'Carrot', category: 'Vegetable', quantity: 30 },
+  { code: 'D4', name: 'Dragon Fruit', category: 'Fruit', quantity: 40 },
+  { code: 'E5', name: 'Eggplant', category: 'Vegetable', quantity: 50 },
+  { code: 'F6', name: 'Fig', category: 'Fruit', quantity: 60 },
+])
+
+const PRODUCT_TABLE_CONFIG: TableConfig = {
+  STATIC_COLUMNS: [
+    {
+      field: 'code',
+      header: 'Code',
+      translationKey: '',
+      sortable: true,
+      style: { width: '100px' },
+    },
+    {
+      field: 'name',
+      header: 'Name',
+      translationKey: '',
+      sortable: true,
+      style: { width: '200px' },
+    },
+    {
+      field: 'category',
+      header: 'Category',
+      translationKey: '',
+      sortable: true,
+      style: { width: '150px' },
+    },
+    {
+      field: 'quantity',
+      header: 'Quantity',
+      translationKey: '',
+      sortable: true,
+      style: { width: '120px' },
+    },
+  ],
+}
+
+const productTableColumns = createTableColumns(PRODUCT_TABLE_CONFIG)
 
 const fetchData = async () => {
   const res = await $demoAPI.getADemo({ id: '1' })
@@ -95,6 +152,29 @@ watch(
         <span>{{ t('route.helloWorld') }}</span>
         <MdiHamburgerMenu class="text-green-400" />
       </p>
+
+      <Button
+        label="Search"
+        pt:root="bg-teal-500 hover:bg-teal-700 active:bg-teal-900 cursor-pointer py-2 px-4 rounded-full border-0 flex items-center gap-2"
+        pt:label="text-white font-bold text-lg"
+        pt:icon="text-white text-xl"
+      >
+        <template #icon>
+          <MaterialSymbolsLightSearch class="text-xl text-white" />
+        </template>
+      </Button>
+
+      <BaseDataTable
+        v-model:first="productTableConfig.first"
+        v-model:rows="productTableConfig.pageCount"
+        v-model:sort-field="productTableConfig.sortField"
+        v-model:sort-order="productTableConfig.sortOrder"
+        :data="products"
+        :striped-rows="false"
+        :column-prop-arr="productTableColumns"
+        paginator-position="top"
+        class="w-full"
+      />
     </div>
   </div>
 </template>
