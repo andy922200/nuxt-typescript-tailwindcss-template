@@ -12,18 +12,10 @@ import { useHttpsConfig } from './app/composables/useHttpsConfig'
 
 const dateStamp = new Date().toISOString().split('T')[0]?.replaceAll('-', '')
 const appBuildAssetsDir = '_nuxt'
-const isLocalDev = process.env.NUXT_PUBLIC_ENV_NAME === 'local'
-
-if (isLocalDev) {
-  // fix for @primevue/nuxt-module 4.3.6 for Nuxt 4 compatibility
-  console.log(
-    `Please change compatibility from { nuxt: "^3.0.0" } to { nuxt: "^4.0.0" } at node_modules/@primevue/nuxt-module/dist/module.mjs and then pnpm install again.`,
-  )
-}
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-08-08',
   app: {
     /* head 可在 plugins/head 統一添加 */
     buildAssetsDir: `/${appBuildAssetsDir}/`,
@@ -98,9 +90,6 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       redirectOn: 'root',
-    },
-    bundle: {
-      optimizeTranslationDirective: false,
     },
     locales: [
       {
