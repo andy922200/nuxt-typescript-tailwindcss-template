@@ -56,9 +56,6 @@ export default defineNuxtConfig({
       useCookie: true,
       redirectOn: 'root',
     },
-    bundle: {
-      optimizeTranslationDirective: false,
-    },
     locales: [
       {
         code: 'zh-tw',
